@@ -18,14 +18,22 @@
 
             <div class="col-xs-8 col-offset-xs-2 text-center">
                 <div class="page-header">
-                    <h1>Example page header <small>Subtext for header</small></h1>
+                    <h1>Felix's Gamepad Tester</h1>
                 </div>
 
                 <canvas id="gamepadRightAxis" width="200" height="200" style="border: 1px solid;"></canvas>
                 <canvas id="gamepadLeftAxis" width="200" height="200" style="border: 1px solid;"></canvas>
 
                 <div>
-                    <select id="changeCrosshair">
+                    <select id="changeRightCrosshair">
+                        <option value="1">Default</option>
+                        <option value="2">Another One</option>
+                        <option value="3">Something Else</option>
+                        <option value="4">Even More</option>
+                        <option value="5">This is ridiculous</option>
+                    </select>
+
+                    <select id="changeLeftCrosshair">
                         <option value="1">Default</option>
                         <option value="2">Another One</option>
                         <option value="3">Something Else</option>
@@ -47,10 +55,10 @@
         <div id="gamepadPrompt"></div>
         <div id="gamepadDisplay"></div>
 
-
-
     <script>
-    var ch = 1;
+    var rch = 1;
+    var lch = 1;
+
     var canvas = document.getElementById("gamepadRightAxis");
     var canvasWidth = canvas.width;
     var canvasHeight = canvas.height;
@@ -108,12 +116,11 @@
             html += "Stick " + (Math.ceil(i/2)+1) + ": " + gp.axes[i] + ", " + gp.axes[i+1] + "<br/>";
         }
 
-        drawCrosshair(ctxRS, ((gp.axes[0] * 100) + 92), (gp.axes[1] * 100) + 92, ch);
-        drawCrosshair(ctxLS, ((gp.axes[2] * 100) + 92), (gp.axes[3] * 100) + 92, ch);
+        drawCrosshair(ctxRS, ((gp.axes[0] * 100) + 92), (gp.axes[1] * 100) + 92, rch);
+        drawCrosshair(ctxLS, ((gp.axes[2] * 100) + 92), (gp.axes[3] * 100) + 92, lch);
 
         ctxRS.clearRect(0, 0, 200, 200);
         ctxLS.clearRect(0, 0, 200, 200);
-
 
         $("#gamepadDisplay").html(html);
     }
@@ -150,8 +157,12 @@
 
     });
 
-    $('#changeCrosshair').on('change', function () {
-        ch = $('#changeCrosshair').val();
+    $('#changeRightCrosshair').on('change', function () {
+        rch = $('#changeRightCrosshair').val();
+    });
+
+    $('#changeLeftCrosshair').on('change', function () {
+        lch = $('#changeLeftCrosshair').val();
     });
     </script>
     </body>
